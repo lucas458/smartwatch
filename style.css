@@ -1,0 +1,824 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #181818;
+    color: #fff;
+    user-select: none;
+}
+
+html, body{
+    overflow: hidden;
+    touch-action: manipulation;
+}
+
+
+
+#main_screen{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+}
+
+
+
+
+
+#main_wrapper{
+    width: 240px;
+    height: 240px;
+    overflow: hidden;
+    background-color: #000;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+
+#main_content_screen_list{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+    left: 0;
+    top: 0;
+}
+
+.screen{
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+
+
+
+
+/****** MAIN ******/
+#screen_main{
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#screen_main_clock_amPm{
+    font-size: 0.7em;
+    position: absolute;
+    top: calc( 50% - 26px );
+    color: #424242;
+    font-weight: 500;
+}
+
+#screen_main_clock_date{
+    font-size: 0.8em;
+    color: #009ff6;
+    font-weight: 500;
+    position: absolute;
+    top: calc( 50% + 48px );
+}
+
+
+/* ICONS */
+#screen_main_header_icon_list{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: auto;
+    position: absolute;
+    top: 64px;
+}
+
+.screen_main_header_icon{
+    width: 16px;
+    height: 16px;
+    display: none;
+}
+
+.screen_main_header_icon_visible{
+    display: flex !important;
+}
+
+
+.screen_main_clock_type_wrapper_visible{
+    visibility: visible !important;
+}
+
+
+/* CLOCK DIGITAL */
+.screen_main_clock_type_wrapper{
+    display: flex;
+    justify-content: center;
+    visibility: hidden;
+    position: absolute;
+}
+
+.screen_main_clock_digital_digit{
+    width: 35px;
+    font-size: 4em;
+}
+
+.screen_main_clock_type_wrapper div:not(.screen_main_clock_digital_digit){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#clock_digital.screen_main_clock_type_wrapper #screen_main_clock_digital_ball div{
+    width: 10px;
+    height: 10px;
+    background-color: #009ff6;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+
+#screen_main_clock_amPm:has(~#clock_digital:not(.screen_main_clock_type_wrapper_visible)),
+#screen_main_clock_date:has(~#clock_digital:not(.screen_main_clock_type_wrapper_visible)){
+    visibility: hidden;
+}
+#clock_digital{
+    gap: 6px;
+}
+
+
+
+/* ANALOG CLOCK */
+.screen_main_clock_type_wrapper:last-child{
+    top: 50% !important;
+}
+
+
+.screen_main_clock_analog_pointer{
+    transform-origin: left center;
+    transform: rotate(0deg);
+    position: absolute;
+    left: 100%;
+}
+
+#analog_pointer_min{
+    width: 80px;
+    height: 4px;
+    border-radius: 25px;
+    background-color: #fff;
+    top: -2px;
+}
+
+#analog_pointer_hour{
+    width: 60px;
+    height: 6px;
+    border-radius: 25px;
+    background-color: red;
+    top: -3px;
+}
+
+#analog_pointer_hour div{
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: relative;
+    left: -50%;
+}
+
+
+#analog_pointer_sec{
+    width: 80px;
+    height: 2px;
+    background-color: #007bff;
+    top: -1px;
+}
+
+#analog_pointer_sec > div{
+    width: 10px;
+    height: 10px;
+    background-color: #007bff;
+    border-radius: 50%;
+    position: relative;
+    left: -50%;
+}
+
+#analog_pointer_sec > div div{
+    width: 6px;
+    height: 6px;
+    border: 1px solid #000;
+    z-index: 1;
+    background-color: #007bff;
+    border-radius: 50%;
+}
+
+
+#analog_pointer_sec > div::before{
+    content: '';
+    display: block;
+    width: 32px;
+    height: 2px;
+    position: absolute;
+    background-color: #007bff;
+    left: -200%;
+}
+
+
+/* MARKS */
+#screen_main_clock_analog_mark_list{
+    pointer-events: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+#screen_main_clock_analog_mark_list > div{
+    width: 120px;
+    padding-right: 8px;
+    height: 2px;
+    transform: rotate(0deg);
+    transform-origin: left center;
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    top: -1px;
+    left: 50%;
+}
+#screen_main_clock_analog_mark_list > div div{
+    width: 24px;
+    height: 2px;
+    background-color: #424242;
+    border-radius: 25px;
+}
+
+    
+
+
+
+
+
+/* DOT MARK */
+#screen_main_clock_digital_mark_list{
+    pointer-events: none;
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+}
+
+#screen_main_clock_digital_mark_list > div{
+    width: 120px;
+    height: 2px;
+    padding-right: 8px;
+    transform: rotate(0deg);
+    transform-origin: left center;
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    top: -1px;
+    left: 50%;
+}
+
+#screen_main_clock_digital_mark_list > div div{
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #353535;
+}
+
+.mark_active div{
+    background-color: #007bff !important;
+}
+
+
+
+#screen_main_clock_battery{
+    width: 24px;
+    height: 24px;
+    color: #757575;
+    position: absolute;
+    top: 32px;
+    left: calc(50% - 24px / 2);
+}
+
+
+
+
+
+
+
+
+
+/****** MENU ******/
+
+#menu_item_list{
+    padding-left: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    top: calc(50% - 32px / 2 );
+}
+
+.menu_item{
+    width: 240px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    opacity: 0.5;
+    position: relative; 
+    left: 0;
+}
+
+.menu_item_mainView{  
+    opacity: 1;
+}
+
+.menu_item_icon{
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+#menu_item_list_selector{
+    width: 240px;
+    height: 32px;
+    z-index: 1;
+    border-radius: 25px 0 0 25px;
+    border: 1px solid #353535;
+    pointer-events: none;
+    position: absolute;
+    top: calc(50% - 32px / 2 );
+    left: 4px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/****** APP SCREEN -- HEART RATE ******/
+.heartRate_wrapper_wrapper{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    color: #ff2d6e;
+}
+
+.heartRate_wrapper_icon{
+    width: 64px;
+    height: 64px;
+    background-color: #ff2d6e;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    animation: 1s heartbeat infinite;
+}
+
+.heartRate_value{
+    font-size: 2em;
+    font-weight: 500;
+    white-space: pre;
+}
+
+@keyframes heartbeat{
+    0%{transform: scale(.85);}
+    20%{transform: scale( 1 );}
+    40%{transform: scale( .85 );}
+    60%{transform: scale( 1 );}
+    80%{transform: scale( .85 );}
+    100%{transform: scale( .85 );}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/****** APP SCREEN -- STOPWATCH ******/
+.stopwatch_wrapper{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 8px;
+}
+
+.stopwatch_icon{
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.stopwatch_content_wrapper, .stopwatch_controls{
+    display: flex;
+}
+
+.stopwatch_content_wrapper{
+    align-items: baseline; 
+}
+
+.stopwatch_digit_big{
+    font-size: 2.5em;
+}
+.stopwatch_digit_tiny{
+    font-size: 1.2em;
+    margin-left: 2px;
+}
+
+.stopwatch_digit_big{
+    width: 56px;
+    letter-spacing: 2px;
+}
+
+
+.stopwatch_controls{
+    height: 100%; 
+    align-items: center;
+    gap: 16px;
+}
+
+.stopwatch_button{
+    overflow: hidden;
+    width: 72px;
+    height: 72px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #009ff6;
+    border: 1px solid #009ff6;
+    color: #000;
+    box-shadow: 0 20px 25px -5px #000, 0 8px 10px -6px #000;
+    transition: 200ms;
+    border-radius: 50%;
+}
+
+.stopwatch_button:active{
+    transform: scale(.95);
+    transition: 1ms;
+    box-shadow: 0 0 0 0 #000;
+}
+
+.stopwatch_button:last-child{
+    background-color: transparent;
+    color: #009ff6;
+}
+
+
+
+
+
+
+
+
+/****** APP SCREEN -- COMPASS ******/
+.compass_line_mark_list{
+    pointer-events: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+.compass_line_mark_list > div{
+    width: 120px;
+    padding-right: 8px;
+    height: 2px;
+    transform: rotate(0deg);
+    transform-origin: left center;
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    top: -1px;
+    left: 50%;
+}
+
+.compass_line_mark_list > div div{
+    width: 24px;
+    height: 2px;
+    background-color: #424242;
+    border-radius: 25px;
+}
+
+
+
+.compass_content_wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+.compass_content{
+    color: #e0e0e0;
+    font-size: 1.2em;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.compass_content:first-child{
+    width: 100%;
+    padding: 0 40px;
+    position: absolute;
+}
+
+.compass_content:last-child{
+    height: 100%;
+    padding: 32px 0;
+    flex-direction: column;
+    position: absolute;
+}
+
+
+.compass_needle_wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+.compass_needle{ 
+    transform: rotate(0deg); 
+    transition: all 400ms cubic-bezier(.47,1.64,.41,.8);
+    position: absolute;
+    
+}
+
+.compass_needle div{
+    border: 10px solid #00000000;
+    border-top-width: 48px;
+    border-bottom-width: 48px;
+}
+
+.compass_needle div:first-child{
+    border-bottom-color: #f00;
+}
+.compass_needle div:last-child{
+    border-top-color: #fff;
+}
+
+
+
+
+
+
+
+/****** APP SCREEN -- MUSIC ******/
+.music_wrapper{
+    height: 100%;
+    padding: 40px 0 16px;
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+.music_content{
+    text-align: center;
+}
+
+.music_title{
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.music_subTitle{
+    font-size: 0.8em; 
+    color: #969696;
+}
+
+
+
+.music_progress{
+    width: 100%;
+    height: 4px;
+    padding: 0 16px;
+}
+
+.music_progress_track{
+    width: 100%;
+    height: 100%;
+    background-color: #181818;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.music_progress_fill{
+    width: 0;
+    height: 100%;
+    background-color: #fff;
+}
+
+
+.music_controls{
+    display: flex;
+    gap: 16px;
+}
+
+
+.music_content + .music_controls .music_button{
+    width: 48px;
+    height: 48px;
+}
+
+.music_button{
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.music_button:active{
+    background-color: #0A0A0A;
+}
+
+
+
+
+
+
+
+/****** APP SCREEN -- CAMERA ******/
+.camera_wrapper{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.camera_button{
+    width: 64px;
+    height: 64px;
+    background-color: #00b4ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 100ms;
+}
+
+.camera_button:active{
+    transform: scale(0.95);
+    transition: 50ms;
+}
+
+
+
+
+
+
+
+
+
+
+/****** APP SCREEN -- DIAL ******/
+.dial_wrapper{
+    height: 100%;
+}
+
+.dial_keypad{
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    align-content: center;
+    gap: 2px;
+}
+
+.dial_lcd{
+    grid-column: span 3;
+    padding: 2px;
+    font-size: 1.2em;
+    font-weight: 500;
+    white-space: pre;
+}
+
+.dial_key{
+    width: 100%;
+    height: 32px;
+    background-color: #101010;
+    font-weight: 500;
+    padding: 2px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dial_key:active{
+    background-color: #0A0A0A;
+}
+
+.dial_keypad > .dial_key:nth-child(3n - 1){
+    border-radius: 0 8px 8px 0;
+}
+.dial_keypad > .dial_key:nth-child(3n - 2){
+    border-radius: 8px 0 0 8px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/****** APP SCREEN -- CALCULATOR ******/
+
+/* calculator_extendedMode */
+.calculator_wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: column; 
+}
+
+.calculator_lcd{
+    margin: 24px 8px 8px;
+    height: 32px;
+}
+
+.calculator_keypad{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    font-size: 1.1em;
+    font-weight: 500;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    padding: 0 24px 0;
+    border-top: 1px solid #353535;
+    
+}
+
+.calculator_key{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: pre;
+}
+
+.calculator_key:not(:empty):active{
+    background-color: #0A0A0A !important;
+}
+
+
+
+.calculator_wrapper:not(.calculator_extendedMode) .calculator_key:nth-child(5n - 1){
+    background-color: #101010;
+}
+
+.calculator_wrapper:not(.calculator_extendedMode) .calculator_key:nth-child(5){
+    color: #dc3545;
+}
