@@ -11,4 +11,4 @@ Um simples smartwatch em HTML
 ![Menu](screenshots/img3.png)
 
 ## Tela: Músicas
-![Músicas](screenshots/img3.png)
+![Músicas](screenshots/img4.png)
